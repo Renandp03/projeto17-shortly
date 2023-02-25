@@ -9,6 +9,10 @@ export async function validateSignUp(req,res,next){
 
         if(password !== confirmPassword) return res.status(422).send("confirme a senha corretamente.")
 
+        const user = await db.query(`SELECT * FROM users WHEERE email = $1`, [email])
+
+        if(user) return res.status(409).send("Email inválido.")
+
 
         
     } catch (error) {
