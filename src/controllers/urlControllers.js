@@ -6,17 +6,21 @@ export async function shorten(req,res){
 
     try {
 
+        const { authorization } = req.headers
+        const token = authorization?.replace("Bearer ", "")
+
+        const {rows:id} = await db.query(`SELECT "userId" FROM sessions WHERE token = $1`,[token])
+
         const { url } = req.body
 
-        const shortUrl = nanoid(url)
+        const shortUrl = nanoid(10)
 
-        await db.query(`INSERT INTO shorts ("shortUrl", url) VALUES ($1,$2)`,[shortUrl,url])
+        await db.query(`INSERT INTO shorts ("userId","shortUrl", url) VALUES ($1,$2,$3)`,[id[0].userId,shortUrl,url])
 
-        const result =  await db.query(`SELECT id,"shortUrl" FROM shorts WHERE "shortUrl" = $1`, [shortUrl])
+        const {rows:result} =  await db.query(`SELECT id,"shortUrl" FROM shorts WHERE "shortUrl" = $1`, [shortUrl])
 
-        res.status(201).send(result)
+        res.status(201).send(result[0])
 
-        
         
     } catch (error) {
         res.status(500).send(error.message)

@@ -23,13 +23,15 @@ export async function signIn(req,res){
 
     try {
 
-        const { email, password } = req.body
+        const { email } = req.body
 
         const token = uuid()
 
-        await db.query(`DELETE FROM sessions WHERE email = $1`, [email])
+        const {rows : user} = await db.query(`SELECT * FROM users WHERE email = $1`,[email])
 
-        await db.query("INSERT INTO sessions (email,token) VALUES ($1,$2)",[email,token])
+        await db.query(`DELETE FROM sessions WHERE "userId" = $1`, [user[0].id])
+
+        await db.query(`INSERT INTO sessions ("userId",token) VALUES ($1,$2)`,[user[0].id,token])
 
         res.status(200).send({token})
         

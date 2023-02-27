@@ -26,8 +26,9 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.sessions (
     id integer NOT NULL,
-    email text NOT NULL,
-    token text NOT NULL
+    "userId" integer NOT NULL,
+    token text NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -57,8 +58,11 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 CREATE TABLE public.shorts (
     id integer NOT NULL,
+    "userId" integer NOT NULL,
     "shortUrl" text,
-    url text
+    url text,
+    "visitCount" integer DEFAULT 0 NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -141,12 +145,16 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.sessions VALUES (1, 1, 'fb46ec39-dbd5-4f7b-ac5e-853ebc51bc8b', '2023-02-27 12:42:29.017548');
 
 
 --
 -- Data for Name: shorts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.shorts VALUES (11, 1, '92C5UlXTrO', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 13:37:28.403165');
+INSERT INTO public.shorts VALUES (12, 1, 'TNzxkg5xva', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 13:39:41.989064');
+INSERT INTO public.shorts VALUES (13, 1, '2BidLLKj1M', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 13:42:56.464569');
 
 
 --
@@ -160,14 +168,14 @@ INSERT INTO public.users VALUES (1, 'João', 'joao@gmail.com', '$2b$10$J7swyPhoY
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 1, false);
+SELECT pg_catalog.setval('public.sessions_id_seq', 1, true);
 
 
 --
 -- Name: shorts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.shorts_id_seq', 1, false);
+SELECT pg_catalog.setval('public.shorts_id_seq', 13, true);
 
 
 --
@@ -194,27 +202,27 @@ ALTER TABLE ONLY public.shorts
 
 
 --
--- Name: shorts shorts_shortUrl_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.shorts
-    ADD CONSTRAINT "shorts_shortUrl_key" UNIQUE ("shortUrl");
-
-
---
--- Name: shorts shorts_url_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.shorts
-    ADD CONSTRAINT shorts_url_key UNIQUE (url);
-
-
---
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sessions sessions_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sessions
+    ADD CONSTRAINT "sessions_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id);
+
+
+--
+-- Name: shorts shorts_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.shorts
+    ADD CONSTRAINT "shorts_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id);
 
 
 --

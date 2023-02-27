@@ -3,12 +3,12 @@ import { db } from "../config/database.js";
 export async function validateShorten(req,res,next){
     try {
 
-        const { authorization } = req.heaters
-        const token = authorization?.replace("Beares ", "");
+        const { authorization } = req.headers
+        const token = authorization?.replace("Bearer ", "");
 
-        const {rows:session} = db.query("SELECT * FROM sessions WHERE token=$1",[token])
+        const {rows:session} = await db.query("SELECT * FROM sessions WHERE token=$1",[token]);
 
-        if(!authorization || !token[0]) return res.status(401).send("Não autorizado.")
+        if(!authorization || !session[0]) return res.status(401).send("Não autorizado.");
 
         
     } catch (error) {

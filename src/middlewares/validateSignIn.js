@@ -10,11 +10,11 @@ export async function validateSignIn(req,res,next){
 
         const {rows:user} = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if(!user[0]) return res.status(404).send("usuario não encontrado.")
+        if(!user[0]) return res.status(401).send("usuario não encontrado.")
 
         const confirmPassword = bcrypt.compareSync(password,user[0].password);
 
-        if(!confirmPassword) return res.status(422).send("Dados inválidos");
+        if(!confirmPassword) return res.status(401).send("Dados inválidos");
 
         
     } catch (error) {

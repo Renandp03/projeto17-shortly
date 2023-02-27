@@ -8,7 +8,7 @@ export function validateSchema(schema){
 
             const errorMessages = error.details.map((err) => err.message)
 
-            return res.status(400).send(errorMessages)
+            return res.status(422).send(errorMessages)
 
         }
         next()
