@@ -23,7 +23,13 @@ export async function signIn(req,res){
 
     try {
 
+        const { email, password } = req.body
+
         const token = uuid()
+
+        await db.query(`DELETE FROM sessions WHERE email = $1`, [email])
+
+        await db.query("INSERT INTO sessions (email,token) VALUES ($1,$2)",[email,token])
 
         res.status(200).send({token})
         
