@@ -28,7 +28,7 @@ export async function shorten(req,res){
 
 }
 
-export async function GetUrl(req,res){
+export async function getUrl(req,res){
 
     try {
         
@@ -36,10 +36,25 @@ export async function GetUrl(req,res){
 
         const { shortUrl, url } = req.url
 
-        res.send({id,shortUrl,url})
+        res.status(200).send({id,shortUrl,url})
 
     } catch (error) {
         res.status(500).send(error.message)
     }
 
+}
+
+export async function openShortUrl(req,res){
+
+    try {
+
+        const { id,url } = req.short
+
+        await db.query(`UPDATE shorts set "visitCount" = "visitCount" + 1 WHERE id = $1`,[id])
+
+        res.status(302).setHeader("location",url).send()
+
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
 }
