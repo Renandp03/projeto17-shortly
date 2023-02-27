@@ -96,7 +96,8 @@ CREATE TABLE public.users (
     email text NOT NULL,
     password text NOT NULL,
     "linkCount" integer DEFAULT 0 NOT NULL,
-    "visitCount" integer DEFAULT 0 NOT NULL
+    "visitCount" integer DEFAULT 0 NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -145,23 +146,21 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.sessions VALUES (1, 1, 'fb46ec39-dbd5-4f7b-ac5e-853ebc51bc8b', '2023-02-27 12:42:29.017548');
+INSERT INTO public.sessions VALUES (1, 1, 'debbaabb-acd4-4a1d-b78f-0e8a1bf5cbf6', '2023-02-27 15:13:05.643699');
 
 
 --
 -- Data for Name: shorts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.shorts VALUES (11, 1, '92C5UlXTrO', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 13:37:28.403165');
-INSERT INTO public.shorts VALUES (12, 1, 'TNzxkg5xva', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 13:39:41.989064');
-INSERT INTO public.shorts VALUES (13, 1, '2BidLLKj1M', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 13:42:56.464569');
+INSERT INTO public.shorts VALUES (1, 1, 'x6Y76dJM5W', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 15:13:39.414001');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'João', 'joao@gmail.com', '$2b$10$J7swyPhoYYwHJpXgq/Gan.dNzz/0V6Cp7jivNT0lLRQ4klFyeMg.q', 0, 0);
+INSERT INTO public.users VALUES (1, 'João', 'joao@gmail.com', '$2b$10$BsaPDtf6bQtAdquayCEW..vmMrPYQ26GwhmmxxNdC.I/Zcb6zUBIa', 0, 0, '2023-02-27 15:12:56.048348');
 
 
 --
@@ -175,7 +174,7 @@ SELECT pg_catalog.setval('public.sessions_id_seq', 1, true);
 -- Name: shorts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.shorts_id_seq', 13, true);
+SELECT pg_catalog.setval('public.shorts_id_seq', 1, true);
 
 
 --
