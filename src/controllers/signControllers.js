@@ -41,3 +41,32 @@ export async function signIn(req,res){
     }
 
 }
+
+export async function userMe(req,res){
+
+    try {
+
+        const { userId } = req.session;
+
+        const { rows:userLinks } = await db.query(`SELECT * FROM shorts WHERE "userId" = $1`,[userId]);
+
+        let visitCount = 0;
+
+        userLinks.map((l) => visitCount += l.visitCount);
+
+        const {rows:dataUser} = await db.query(`SELECT * FROM users WHERE id = $1`,[userId]);
+
+        const { id, name } = dataUser[0];
+
+        const dataLinks = [];
+
+        userLinks.map((l) => dataLinks.push({id:l.id,shortUrl:l.shortUrl,url:l.url}));
+
+        const result = { id,name,visitCount,shortenedUrls: dataLinks};
+
+        res.status(200).send(result);
+        
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}

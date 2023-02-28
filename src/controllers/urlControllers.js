@@ -23,7 +23,7 @@ export async function shorten(req,res){
 
         
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send(error.message);
     }
 
 }
@@ -32,14 +32,14 @@ export async function getUrl(req,res){
 
     try {
         
-        const id = req.id
+        const id = req.id;
 
-        const { shortUrl, url } = req.url
+        const { shortUrl, url } = req.url;
 
-        res.status(200).send({id,shortUrl,url})
+        res.status(200).send({id,shortUrl,url});
 
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send(error.message);
     }
 
 }
@@ -48,11 +48,11 @@ export async function openShortUrl(req,res){
 
     try {
 
-        const { id,url } = req.short
+        const { id,url } = req.short;
 
-        await db.query(`UPDATE shorts set "visitCount" = "visitCount" + 1 WHERE id = $1`,[id])
+        await db.query(`UPDATE shorts set "visitCount" = "visitCount" + 1 WHERE id = $1`,[id]);
 
-        res.status(302).setHeader("location",url).send()
+        res.status(302).setHeader("location",url).send();
 
     } catch (error) {
         res.status(500).send(error.message)
