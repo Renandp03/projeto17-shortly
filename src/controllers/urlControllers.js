@@ -58,3 +58,18 @@ export async function openShortUrl(req,res){
         res.status(500).send(error.message)
     }
 }
+
+export async function deleteShortUrl(req,res){
+    
+    try {
+        
+        const { id } = req.params;
+
+        await db.query(`DELETE FROM shorts WHERE id = $1`, [id]);
+
+        res.status(204).send("deletado");
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
