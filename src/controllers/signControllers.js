@@ -60,7 +60,7 @@ export async function userMe(req,res){
 
         const dataLinks = [];
 
-        userLinks.map((l) => dataLinks.push({id:l.id,shortUrl:l.shortUrl,url:l.url}));
+        userLinks.map((l) => dataLinks.push({id:l.id,shortUrl:l.shortUrl,url:l.url,visitCount:l.visitCount}));
 
         const result = { id,name,visitCount,shortenedUrls: dataLinks};
 
