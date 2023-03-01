@@ -95,7 +95,7 @@ CREATE TABLE public.users (
     name text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
-    "linkCount" integer DEFAULT 0 NOT NULL,
+    "linksCount" integer DEFAULT 0 NOT NULL,
     "visitCount" integer DEFAULT 0 NOT NULL,
     "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -146,42 +146,55 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.sessions VALUES (1, 1, 'debbaabb-acd4-4a1d-b78f-0e8a1bf5cbf6', '2023-02-27 15:13:05.643699');
+INSERT INTO public.sessions VALUES (1, 1, '1c3ea60c-e09c-4df3-9034-248dd009000f', '2023-02-28 20:23:55.246073');
+INSERT INTO public.sessions VALUES (3, 3, 'b2443659-7f5b-4cab-b97c-3f9f0c77d10b', '2023-02-28 21:49:57.982076');
 
 
 --
 -- Data for Name: shorts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.shorts VALUES (1, 1, 'x6Y76dJM5W', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-27 15:13:39.414001');
+INSERT INTO public.shorts VALUES (1, 1, 'NPtjBmsHHz', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-28 20:24:34.212958');
+INSERT INTO public.shorts VALUES (2, 1, 'cWyFmlevzl', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 1, '2023-02-28 20:38:17.536742');
+INSERT INTO public.shorts VALUES (3, 3, 'dizFNG2i8x', 'https://www.youtube.com/watch?v=DH_j4qs-92k', 0, '2023-02-28 21:48:21.538077');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'João', 'joao@gmail.com', '$2b$10$BsaPDtf6bQtAdquayCEW..vmMrPYQ26GwhmmxxNdC.I/Zcb6zUBIa', 0, 0, '2023-02-27 15:12:56.048348');
+INSERT INTO public.users VALUES (1, 'Renan', 'renan@gmail.com', '$2b$10$JElloiinDN4OVKN9v4d.9OmcHfCMFcE75rP14n0ksAqn7EBahI33K', 1, 1, '2023-02-28 20:23:50.308887');
+INSERT INTO public.users VALUES (2, 'Matheus', 'matheus@gmail.com', '$2b$10$eYDAlbrQHOsXXSi4DuadOO0va6Xnb1Y9hnwp/C1zAQwE5qSG1BwkS', 0, 0, '2023-02-28 21:04:18.105218');
+INSERT INTO public.users VALUES (4, 'Letécia', 'letty@gmail.com', '$2b$10$rTlI/gt68npYhhVcvygECuzdHYveNtURDr9T4EP7fjmQP2QTFbdbW', 0, 0, '2023-02-28 21:04:51.456217');
+INSERT INTO public.users VALUES (5, 'Vitor', 'vitor@gmail.com', '$2b$10$roE3CUqmK0AhxEB55inOYu63YO4mJ1eN31Gd.4JF4c9YG3Z4AO6e6', 0, 0, '2023-02-28 21:05:16.496042');
+INSERT INTO public.users VALUES (6, 'Claudio', 'claudio@gmail.com', '$2b$10$Z0h8sQ4XzSf2UGHoMJyfxOs3ZeCJ9LmLkunUUDUwktjBONDPPqxbq', 0, 0, '2023-02-28 21:05:39.299528');
+INSERT INTO public.users VALUES (7, 'Kaio', 'kaio@gmail.com', '$2b$10$.4fq/frIR0IYa09DNVbXJORPoTEi6ig5p74wgTXYtq23EyjCMuooe', 0, 0, '2023-02-28 21:05:54.630664');
+INSERT INTO public.users VALUES (8, 'Joaquin', 'joaquin@gmail.com', '$2b$10$47K97HWd7BbJQOO3jwcb2.pmzbQ0qD1KF4OTVP7JGCCkCYEhd6En.', 0, 0, '2023-02-28 21:06:17.058336');
+INSERT INTO public.users VALUES (9, 'Mario', 'mario@gmail.com', '$2b$10$v.yR4WvebTg29LR6f19KIOd0fNcciBwnz/JVzuDCzYrfKy8rMkUR.', 0, 0, '2023-02-28 21:13:51.427242');
+INSERT INTO public.users VALUES (10, 'Luigi', 'luigi@gmail.com', '$2b$10$plKe43jtY.sIXfvYdenWIeR3ZJhkdCdefuGWCbGfqyyxcP64C2n9y', 0, 0, '2023-02-28 21:14:18.607497');
+INSERT INTO public.users VALUES (11, 'Pedro', 'pedro@gmail.com', '$2b$10$t7XTsvhOYG6nO5Pt29GXTeiE2AeCLojybHK71YqhCxgMLgK/AKaMi', 0, 0, '2023-02-28 21:14:35.313772');
+INSERT INTO public.users VALUES (3, 'Ana', 'ana@gmail.com', '$2b$10$AtRmyUIOMqyub/yrM0dxHe.53rqN5SiHTjCDJQkHQoQXrrFUo6vKe', 1, 0, '2023-02-28 21:04:35.249397');
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 1, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 3, true);
 
 
 --
 -- Name: shorts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.shorts_id_seq', 1, true);
+SELECT pg_catalog.setval('public.shorts_id_seq', 3, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_id_seq', 11, true);
 
 
 --
