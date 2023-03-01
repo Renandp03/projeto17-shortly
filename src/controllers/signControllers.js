@@ -50,13 +50,9 @@ export async function userMe(req,res){
 
         const { rows:userLinks } = await db.query(`SELECT * FROM shorts WHERE "userId" = $1`,[userId]);
 
-        let visitCount = 0;
-
-        userLinks.map((l) => visitCount += l.visitCount);
-
         const {rows:dataUser} = await db.query(`SELECT * FROM users WHERE id = $1`,[userId]);
 
-        const { id, name } = dataUser[0];
+        const { id,name,visitCount } = dataUser[0]
 
         const dataLinks = [];
 
