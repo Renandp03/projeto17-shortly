@@ -60,7 +60,7 @@ export async function openShortUrl(req,res){
         res.status(302).setHeader("location",url).send();
 
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send(error.message);
     }
 }
 
@@ -88,9 +88,7 @@ export async function getRanking(req,res){
                                                 ORDER BY "visitCount" DESC, name
                                                 LIMIT 10 `);
 
-        console.log(ranking)
-
-        res.status(200).send(ranking)
+        res.status(200).send(ranking);
 
     } catch (error) {
         res.status(500).send(error.message)

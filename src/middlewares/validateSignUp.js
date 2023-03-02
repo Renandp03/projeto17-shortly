@@ -5,18 +5,18 @@ export async function validateSignUp(req,res,next){
 
         const { name, email, password, confirmPassword} = req.body;
 
-        if(!name || !email || !password || !confirmPassword) return res.status(422).send("preencha todos os campos.")
+        if(!name || !email || !password || !confirmPassword) return res.status(422).send("preencha todos os campos.");
 
-        if(password !== confirmPassword) return res.status(422).send("confirme a senha corretamente.")
+        if(password !== confirmPassword) return res.status(422).send("confirme a senha corretamente.");
 
-        const {rows:user} = await db.query(`SELECT * FROM users WHERE email = $1`, [email])
+        const {rows:user} = await db.query(`SELECT * FROM users WHERE email = $1`, [email]);
 
-        if(user[0]) return res.status(409).send("Email inválido.")
+        if(user[0]) return res.status(409).send("Email inválido.");
 
 
         
     } catch (error) {
-        res.status(500).send("Problemas no servidor")
+        res.status(500).send("Problemas no servidor");
     }
     next()
 }

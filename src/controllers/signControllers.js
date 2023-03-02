@@ -12,7 +12,7 @@ export async function signUp(req,res){
 
         await db.query(`INSERT INTO users (name,email,password) VALUES ($1,$2,$3)`,[name,email,hashPassword]);
 
-        res.status(201).send("ok")
+        res.status(201).send("ok");
 
     } catch (error) {
         res.status(500).send(error.message);
@@ -23,17 +23,17 @@ export async function signIn(req,res){
 
     try {
 
-        const { email } = req.body
+        const { email } = req.body;
 
-        const token = uuid()
+        const token = uuid();
 
-        const {rows : user} = await db.query(`SELECT * FROM users WHERE email = $1`,[email])
+        const {rows : user} = await db.query(`SELECT * FROM users WHERE email = $1`,[email]);
 
-        await db.query(`DELETE FROM sessions WHERE "userId" = $1`, [user[0].id])
+        await db.query(`DELETE FROM sessions WHERE "userId" = $1`, [user[0].id]);
 
-        await db.query(`INSERT INTO sessions ("userId",token) VALUES ($1,$2)`,[user[0].id,token])
+        await db.query(`INSERT INTO sessions ("userId",token) VALUES ($1,$2)`,[user[0].id,token]);
 
-        res.status(200).send({token})
+        res.status(200).send({token});
         
     } catch (error) {
         res.status(500).send(error.message)
@@ -52,7 +52,7 @@ export async function userMe(req,res){
 
         const {rows:dataUser} = await db.query(`SELECT * FROM users WHERE id = $1`,[userId]);
 
-        const { id,name,visitCount } = dataUser[0]
+        const { id,name,visitCount } = dataUser[0];
 
         const dataLinks = [];
 

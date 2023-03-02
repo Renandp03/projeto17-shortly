@@ -9,11 +9,11 @@ export async function validateOpenShortUrl(req,res,next){
 
         if(!short[0]) return res.status(404).send("shortUrl não encontrada");
 
-        req.short = short[0]
+        req.short = short[0];
 
         
     } catch (error) {
-        res.status(500).send("Problemas no servidor")
+        res.status(500).send("Problemas no servidor");
         
     }
     next()

@@ -10,7 +10,7 @@ export async function validateSignIn(req,res,next){
 
         const {rows:user} = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
-        if(!user[0]) return res.status(401).send("usuario não encontrado.")
+        if(!user[0]) return res.status(401).send("usuario não encontrado.");
 
         const confirmPassword = bcrypt.compareSync(password,user[0].password);
 
@@ -18,7 +18,7 @@ export async function validateSignIn(req,res,next){
 
         
     } catch (error) {
-        res.status(500).send("Problemas no servidor")
+        res.status(500).send("Problemas no servidor");
     }
     next()
 }
